@@ -1,0 +1,51 @@
+version: '3.8'
+
+services:
+  sqlserver:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    container_name: ticketbooking_db
+    ports:
+      - "1433:1433"
+    environment:
+      - ACCEPT_EULA=Y
+      - SA_PASSWORD=Your_password123
+    volumes:
+      - sqlserver_data:/var/opt/mssql
+    networks:
+      - ticketbooking-network
+
+  backend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: ticketbooking_api
+    ports:
+      - "8080:8080"
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ConnectionStrings__DefaultConnection=Server=sqlserver,1433;Database=TicketBookingDb;User Id=sa;Password=Your_password123;TrustServerCertificate=True
+    depends_on:
+      - sqlserver
+    networks:
+      - ticketbooking-network
+
+  frontend:
+    build:
+      context: .
+      dockerfile: Dockerfile.frontend
+    container_name: ticketbooking_web
+    ports:
+      - "3000:80"
+    depends_on:
+      - backend
+    environment:
+      - VITE_API_URL=http://localhost:8080/api
+    networks:
+      - ticketbooking-network
+
+networks:
+  ticketbooking-network:
+    driver: bridge
+
+volumes:
+  sqlserver_data:

@@ -1,0 +1,1 @@
+{"@t":"2026-09-22T17:04:22.4200840Z","@mt":"Application is shutting down...","SourceContext":"Microsoft.Hosting.Lifetime"}
