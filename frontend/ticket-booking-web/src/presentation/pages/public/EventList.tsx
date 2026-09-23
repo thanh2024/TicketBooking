@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useSearchParams } from 'react-router-dom';
-import { Filter, Search, X } from 'lucide-react';
+import { Filter, Search } from 'lucide-react';
 import { useEvents, useCategories } from '../../hooks/useEvents';
 import { EventCard } from '../../../shared/components/EventCard';
 import { Button } from '../../../shared/components/Button';
@@ -106,8 +106,8 @@ export const EventList: React.FC = () => {
                       type="radio"
                       id={`cat-${cat.id}`}
                       name="category"
-                      checked={categoryId === cat.id}
-                      onChange={() => setCategoryId(cat.id)}
+                      checked={categoryId === String(cat.id)}
+                      onChange={() => setCategoryId(String(cat.id))}
                       className="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300"
                     />
                     <label htmlFor={`cat-${cat.id}`} className="ml-2 text-sm text-gray-700">{cat.name}</label>

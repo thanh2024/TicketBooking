@@ -1,5 +1,5 @@
 import React, { useState, useMemo } from 'react';
-import { ShoppingCart, Search, ChevronDown, ChevronUp, Minus, User, Calendar, Ticket } from 'lucide-react';
+import { ShoppingCart, Search, ChevronDown, ChevronUp, Minus, User, Ticket } from 'lucide-react';
 import { useAdminOrders } from '../../hooks/useAdmin';
 
 const formatCurrency = (v: number) =>

@@ -7,7 +7,6 @@ import {
   MapPin, 
   Search, 
   Ban, 
-  Filter, 
   AlertTriangle 
 } from 'lucide-react';
 import { usePendingEvents, useApproveEvent, useRejectEvent, useBlockEvent } from '../../hooks/useAdmin';

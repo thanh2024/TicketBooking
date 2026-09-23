@@ -19,7 +19,7 @@ export const Home: React.FC = () => {
     e.preventDefault();
     const params = new URLSearchParams();
     if (searchQuery.trim()) params.set('search', searchQuery.trim());
-    if (selectedCategory) params.set('categoryId', selectedCategory.id);
+    if (selectedCategory) params.set('categoryId', String(selectedCategory.id));
     navigate(`/events?${params.toString()}`);
   };
 
@@ -98,8 +98,8 @@ export const Home: React.FC = () => {
                       <button
                         key={cat.id}
                         type="button"
-                        className={`w-full text-left px-4 py-2.5 text-sm transition-colors ${selectedCategory?.id === cat.id ? 'bg-blue-50 text-blue-700 font-medium' : 'text-gray-700 hover:bg-gray-50'}`}
-                        onClick={() => { setSelectedCategory(cat); setIsCategoryOpen(false); }}
+                        className={`w-full text-left px-4 py-2.5 text-sm transition-colors ${selectedCategory?.id === String(cat.id) ? 'bg-blue-50 text-blue-700 font-medium' : 'text-gray-700 hover:bg-gray-50'}`}
+                        onClick={() => { setSelectedCategory({ id: String(cat.id), name: cat.name }); setIsCategoryOpen(false); }}
                       >
                         {cat.name}
                       </button>

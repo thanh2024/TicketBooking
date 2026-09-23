@@ -27,7 +27,7 @@ export function useProcessPaymentCallback() {
 
   return useMutation({
     mutationFn: (data: PaymentCallbackRequest) => PaymentRepository.processCallback(data),
-    onSuccess: (_, variables) => {
+    onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['payments'] });
       queryClient.invalidateQueries({ queryKey: ['orders'] });
       queryClient.invalidateQueries({ queryKey: ['tickets'] });

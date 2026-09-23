@@ -1,6 +1,6 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useForm, useFieldArray } from 'react-hook-form';
+import { useForm, useFieldArray, type SubmitHandler } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Plus, Trash2, Calendar, MapPin, Tag, Image as ImageIcon } from 'lucide-react';
 import { createEventSchema, type CreateEventFormData } from '../../../application/events/EventSchemas';
@@ -21,10 +21,10 @@ export const CreateEvent: React.FC = () => {
     handleSubmit,
     formState: { errors, isSubmitting },
   } = useForm<CreateEventFormData>({
-    resolver: zodResolver(createEventSchema),
+    resolver: zodResolver(createEventSchema) as any,
     defaultValues: {
       ticketTypes: [
-        { name: 'Vé Thường', price: 0, totalQuantity: 100, saleStartTime: '', saleEndTime: '' }
+        { name: 'Vé Thường', price: 0, totalQuantity: 100, saleStartTime: '', saleEndTime: '' } as any
       ]
     }
   });
@@ -34,7 +34,7 @@ export const CreateEvent: React.FC = () => {
     name: 'ticketTypes',
   });
 
-  const onSubmit = async (data: CreateEventFormData) => {
+  const onSubmit: SubmitHandler<CreateEventFormData> = async (data: CreateEventFormData) => {
     try {
       // Backend expecting CategoryId, which is mapped from data.categoryId in schema
       const result = await createEventMutation.mutateAsync(data);
